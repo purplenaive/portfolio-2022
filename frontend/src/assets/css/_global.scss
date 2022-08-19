@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+@import "~@/assets/css/variables";
+@import "~@/assets/css/font";
+@import "~@/assets/css/icon";
+@import "~@/assets/css/mixin";
+@import "~@/assets/css/reset";
+
+body {
+  font-family: $ptd;
+  font-weight: $font-md;
+  color: $black;
+  background-color: $pale !important;
+}
+
+.main {
+  padding-top: 120px;
+}
+
+// ********** SCREEEN READER ONLY ********** //
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+// ********** COLOR TEXT STYLE ********** //
+.text--strong { font-weight: $font-b; }
+.text--black { color: $black; }
+.text--deep-blue { color: $deep-blue; }
+.text--white { color: white; }
+// ********** COMMON BUTTON STYLE ********** //
+.common-button {
+  @include flex(true, row, nowrap, center, center);
+
+  height: 45px;
+  padding: 0 24px;
+  font-size: 16px;
+  color: $deep-blue;
+  text-align: center;
+  line-height: 1;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  background-color: white;
+  
+  &:hover {
+    box-shadow: 0 2px 8px rgba($black, 0.15);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    box-shadow: inset 0 2px 8px rgba($black, 0.15);
+    transition: all 0.3s ease;
+  }
+  &:disabled {
+    color: $border-gray;
+    background-color: $pale;
+  }
+  &.depressed {
+
+    &:hover {
+      box-shadow: unset;
+    }
+  }
+
+  &.active {
+    color: white;
+    background-color: $deep-blue;
+  }
+  &.outlined {
+    border: 1px solid $deep-blue;
+  }
+  &.outlined--black {
+    border: 1px solid $black;
+  }
+  &.fab {
+    width: 45px;
+    padding: 0;
+  }
+  &.escape {
+    width: unset;
+    height: unset;
+    background-color: transparent;
+  }
+}
+// ********** COMMON TAG LIST STYLE ********** //
+.common-tag-list {
+  @include flex(false, row, wrap, flex-start, center);
+
+  align-content: center;
+  gap: 8px;
+
+  .tag__item {
+    padding: 8px 12px;
+    border: 1px solid $deep-blue;
+    color: $deep-blue;
+    font-size: 14px;
+    font-weight: $font-lt;
+    line-height: 1;
+    border-radius: 24px;
+  }
+}
+
+// ********** CARD TITLE | CONTENTS ********** //
+.card__title {
+  @include flex(flase, row, nowrap, space-between, center);
+
+  min-width: 100%;
+  height: 32px;
+  margin-bottom: 24px;
+
+  .title__text {
+    color: $deep-blue;
+    font-weight: $font-b;
+    font-size: 18px;
+  }
+
+  .title__action {
+    padding: 10px;
+
+    .icon {
+      @include icon-custom(16);
+    }
+  }
+}
+.card__contents {
+  width: 100%;
+}

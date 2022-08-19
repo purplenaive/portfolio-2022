@@ -1,0 +1,25 @@
+// ********** flex ********** //
+@mixin flex($inline: false, $direction: row, $wrap: nowrap, $justify: center, $align: center) {
+  display: if($inline, inline-flex, flex);
+  flex-flow: $direction $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// ********** section--1200 ********** //
+@mixin section-1200($padding: true, $overflow: true) {
+  width: 1200px;
+  margin: 0 auto;
+  padding: if($padding, 24px, 0);
+  overflow: if($overflow, hidden, visible);
+}
+
+// ********** card ********** //
+@mixin card($padding: true, $mini: false) {
+  overflow: hidden;
+  border-radius: 24px;
+  @if $padding {
+    padding: if($mini, 16px, 24px);
+  }
+  background-color: white;
+}
