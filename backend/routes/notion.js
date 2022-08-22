@@ -8,7 +8,7 @@ const options = {
   note_token: "d1619275de714a158cc8d90bef99ddb4",
   createOptions(target, date, size, filter) {
     const url = this[target + "_token"];
-
+    
     return {
       method: "POST",
       url: `https://api.notion.com/v1/databases/${url}/query`,
@@ -24,7 +24,16 @@ const options = {
 
 
 const project_options = options.createOptions("project", "2022-02-22", 20);
-// const note_options = options.createOptions(note_token);
+const note_options = options.createOptions("note", "2022-02-22", 100, {
+  "and": [
+    {
+      "property": "view",
+      "checkbox": {
+        "equals": true
+      }
+    }
+  ]
+});
 
 router.get("/api/project", async (req, res, next) => {
   let projects = [];
@@ -38,6 +47,20 @@ router.get("/api/project", async (req, res, next) => {
     });
 
     res.send(projects);
+})
+
+router.get("/api/note", async (req, res, next) => {
+  let notes = [];
+
+  await axios.request(note_options)
+    .then(res => {
+      notes = res.data.results;
+    })
+    .catch(err => {
+      console.log("notion get notes error: ", err);
+    });
+
+    res.send(notes);
 })
 
 module.exports = router;

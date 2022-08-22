@@ -265,7 +265,7 @@
     align-content: flex-end;
     max-height: 1000px;
     gap: 24px;
-    margin-bottom: 500px;
+    margin-bottom: 200px;
 
     .card:not(.icon) {
       @include card;

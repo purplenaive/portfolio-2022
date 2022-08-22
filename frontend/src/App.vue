@@ -1,22 +1,15 @@
 <template>
   <main-header></main-header>
-  <main class="main">
-    <main-carousel></main-carousel>
-    <resume-cards></resume-cards>
-    <project-cards></project-cards>
-  </main>
+  <router-view></router-view>
 </template>
 
 <script>
 import mainHeader from "@/components/mainHeader.vue";
-import mainCarousel from "@/components/mainCarousel.vue";
-import resumeCards from "@/components/resumeCards.vue";
-import projectCards from "@/components/projectCards.vue";
 
 export default {
   name: 'App',
   components: {
-    mainHeader, mainCarousel, resumeCards, projectCards,
+    mainHeader,
   }
 }
 </script>
