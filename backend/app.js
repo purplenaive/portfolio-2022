@@ -22,7 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/', notionRouter);
+app.use('/', indexRouter);
+app.use('/project', notionRouter);
+app.use('/note', notionRouter);
 
 
 // catch 404 and forward to error handler

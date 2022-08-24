@@ -18,6 +18,18 @@
           <p class="info__value">{{info.value}}</p>
         </li>
       </ul>
+      <ul class="card card-info-links">
+        <li 
+          v-for="info in info_links"
+          :key="info.name"
+          class="info__item"
+        >
+          <a :href="info.path" class="info__router" target="_blank">
+            <i class="icon" :class="info.icon"></i>
+            <span class="info__title">{{info.title}}</span>
+          </a>
+        </li>
+      </ul>
     </article>
     <!-- 자격증 | 공부 -->
     <article class="card card-certification">
@@ -36,7 +48,7 @@
             class="certification__item"
           >
             <p class="certi__title">
-              <i class="icon certi__icon" :class="certi.type"></i>
+              <i class="icon certi__icon" :class="certi.type" aria-hidden="true"></i>
               <span class="title__text">{{certi.name}}</span>
             </p>
             <span class="certi__date">{{certi.date}}</span>
@@ -155,6 +167,12 @@
             { name: "career", title: "경력", icon: "paper", value: "경력 3년"},
           ],
         },
+        info_links: [
+          { title: "연락처", name: "call", icon: "call", path: "tel:01084353663" },
+          { title: "이메일", name: "email", icon: "mail", path: "mailto:purplenaive@gmail.com" },
+          { title: "블로그", name: "blog", icon: "note", path: "https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=d7be502b8a17444a8b8f7c45f627715e" },
+          { title: "이력서", name: "resume", icon: "paper", path: "https://purplenaive.notion.site/833eb81908cc490ea33a5596d5c0de42" },
+        ],
         certification: {
           data: [
             {type: "card", name: "웹디자인기능사", date: "18.07.23"},
@@ -265,7 +283,7 @@
     align-content: flex-end;
     max-height: 1000px;
     gap: 24px;
-    margin-bottom: 200px;
+    margin-bottom: 24px;
 
     .card:not(.icon) {
       @include card;
@@ -275,6 +293,8 @@
   // ********** PROFILE CARD ********** //
   .card-profile {
     width: 300px;
+    position: relative;
+    overflow: visible !important;
 
     .profile {
       text-align: center;
@@ -309,16 +329,42 @@
         text-align: center;
       }
       .info__icon {
-        margin-bottom: 4px;
+        margin: 0 auto 4px;
       }
       .info__value {
         font-size: 15px;
       }
     }
   }
+  // ********** INFO LINKS CARD ********** //
+  .card-info-links {
+    @include flex(false, column, nowrap, center, center);
+
+    gap: 12px;
+    width: 115px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -24px;
+    transform: translate(-100%, 0);
+
+    .info__item {
+      width: 100%;
+
+      .info__router {
+        @include flex(false, column, nowrap, center, center);
+
+        width: 100%;
+        gap: 3px;
+      }
+      .info__title {
+        font-size: 14px;
+      }
+    }
+  }
   // ********** CERTIFICATION CARD ********** //
   .card-certification {
-    width: 300px;
+    width: 440px;
 
     .certification-list {
 
@@ -416,6 +462,7 @@
   // ********** CAREER CARD ********** //
   .card-career {
     width: 420px;
+    height: 618px;
   }
   .career-list {
     width: 100%;

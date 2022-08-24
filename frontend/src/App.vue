@@ -1,15 +1,17 @@
 <template>
   <main-header></main-header>
   <router-view></router-view>
+  <main-footer></main-footer>
 </template>
 
 <script>
 import mainHeader from "@/components/mainHeader.vue";
+import mainFooter from "@/components/mainFooter.vue";
 
 export default {
   name: 'App',
   components: {
-    mainHeader,
+    mainHeader, mainFooter,
   }
 }
 </script>

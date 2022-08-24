@@ -16,6 +16,7 @@ const options = {
         Accept: "application/json",
         "Notion-Version": date,
         Authorization: `Bearer ${this.access_key}`,
+        "Content-Type": "application/json",
       },
       data: {page_size: size, filter},
     }
@@ -35,6 +36,7 @@ const note_options = options.createOptions("note", "2022-02-22", 100, {
   ]
 });
 
+// project data
 router.get("/api/project", async (req, res, next) => {
   let projects = [];
   
@@ -45,10 +47,9 @@ router.get("/api/project", async (req, res, next) => {
     .catch(err => {
       console.log("notion get projects error: ", err);
     });
-
-    res.send(projects);
+  res.send(projects);
 })
-
+// note data
 router.get("/api/note", async (req, res, next) => {
   let notes = [];
 
@@ -62,5 +63,6 @@ router.get("/api/note", async (req, res, next) => {
 
     res.send(notes);
 })
+
 
 module.exports = router;

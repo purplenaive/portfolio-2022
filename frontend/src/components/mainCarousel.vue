@@ -4,8 +4,11 @@
       <img src="@/assets/image/main-carousel.jpg" alt="바다의 파도가 꽉 차있는" class="carousel-image">
     </div>
     <div class="carousel__typo">
-      <img src="@/assets/image/purpleniave-typo-top.svg" alt="purple" class="typo-image typo__top">
-      <img src="@/assets/image/purpleniave-typo-bottom.svg" alt="naive" class="typo-image typo__bottom">
+      <div class="typo-portfolio">
+        <img src="@/assets/image/purpleniave-typo-top.svg" alt="port" class="typo-image typo__top">
+        <img src="@/assets/image/purpleniave-typo-bottom.svg" alt="folio" class="typo-image typo__bottom">
+      </div>
+      <img src="@/assets/image/portfolio-typo.svg" alt="은희의 포트폴리오" class="typo-image typo-korean-portfolio">
     </div>
   </section>
 </template>
@@ -24,7 +27,7 @@
     margin-bottom: 24px;
     position: relative;
 
-
+    // ********** CAROUSEL ********** //
     .carousel__item {
       @include card(false);
 
@@ -39,19 +42,31 @@
       }
     }
 
+    // ********** TYPO CARD ********** //
     .carousel__typo {
       position: absolute;
       bottom: 0;
-      left: 30px;
+      left: 20px;
 
+      .typo-portfolio {
+        position: relative;
+      }
       .typo-image {
         display: block;
+        transform: scale(0.85);
+        transform-origin: left bottom;
       }
       .typo__bottom {
         position: absolute;
         bottom: 0%;
         left: 0;
-        transform: translate(0, 100%);
+        transform: scale(0.85) translate(0, 100%);
+      }
+
+      .typo-korean-portfolio {
+        position: absolute;
+        bottom: -190px;
+        transform: unset;
       }
     }
   }

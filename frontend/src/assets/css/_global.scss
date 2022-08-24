@@ -14,7 +14,10 @@ body {
 }
 
 .main {
-  padding-top: 120px;
+  min-height: 100vh;
+  padding: 160px 0;
+  margin-bottom: 150px;
+  background-color: $pale;
 }
 
 // ********** SCREEEN READER ONLY ********** //
@@ -50,6 +53,7 @@ body {
   transition: all 0.3s ease;
   background-color: white;
   
+  // 상태
   &:hover {
     box-shadow: 0 2px 8px rgba($black, 0.2);
     transition: all 0.3s ease;
@@ -58,18 +62,8 @@ body {
     box-shadow: inset 0 4px 8px rgba($black, 0.2);
     transition: all 0.3s ease;
   }
-  &:disabled {
-    color: $border-gray;
-    background-color: $pale;
-  }
-  &.depressed {
-
-    &:hover {
-      box-shadow: unset;
-    }
-  }
-  
-  &.active {
+  // 클래스
+  &.active:not(.disabled):not(:disabled) {
     color: white;
     background-color: $deep-blue;
 
@@ -83,14 +77,36 @@ body {
   &.outlined--black {
     border: 1px solid $black;
   }
+  // fab
   &.fab {
     width: 45px;
     padding: 0;
   }
+  // 비형식, 탈출된 스타일
   &.escape {
     width: unset;
     height: unset;
     background-color: transparent;
+  }
+  // 최우선 상태 선택자
+  &.depressed {
+    
+    &:hover {
+      box-shadow: unset;
+    }
+  }
+  &.disabled,
+  &:disabled {
+    color: $border-gray;
+    background-color: $pale;
+
+    .icon {
+      opacity: .5;
+    }
+
+    &:hover {
+      box-shadow: unset !important;
+    }
   }
 }
 // ********** COMMON TAG LIST STYLE ********** //
@@ -110,7 +126,6 @@ body {
     border-radius: 24px;
   }
 }
-
 // ********** CARD TITLE | CONTENTS ********** //
 .card__title {
   @include flex(flase, row, nowrap, space-between, center);
