@@ -41,7 +41,7 @@
         <div class="view__actions">
           <a 
             :href="project.active.data.links.git" 
-            class="action__button common-button fab"
+            class="action__button common-button button--fab"
             :class="{'disabled': !project.active.data.links.git}"
             target="_blank"
             title="깃 페이지 이동하기"
@@ -56,7 +56,7 @@
           >설명 보기</a>
           <a 
             :href="project.active.data.links.page" 
-            class="action__button common-button active"
+            class="action__button common-button button--active"
             :class="{'disabled': !project.active.data.links.page}"
             target="_blank"
           >페이지</a>
@@ -119,7 +119,7 @@
         </ul>
       </article>
     </section>
-    <loading-spinner></loading-spinner>
+    <loading-spinner :active="loading"></loading-spinner>
   </main>
 </template>
 
@@ -148,10 +148,13 @@
           ],
           data: [],
         },
+        loading: true,
       };
     },
     methods: {
       getProjects() { // 프로젝트 가져오기
+        this.loading = true;
+
         this.$axios.get("/project/api/project")
           .then(res => {
             this.trimProjects(res.data);
@@ -169,20 +172,35 @@
           const tags = properties["태그"].multi_select.map(item => item.name);
           const tools = properties["사용 툴"].multi_select.map(item => item.name);
           const category = properties.category.select ? properties.category.select.name : "";
+          const period =  properties["작업 기간"].rich_text;
+          const summary = properties["간단 설명"].rich_text;
+          let back_link = properties.back_link.rich_text;
+          let back_link_length = back_link.length;
+          
+          if(back_link_length) {
+            back_link.map(value => {
+              if(value.type == "mention") {
+                back_link = value.href;
+              }
+            })
+          } else {
+            back_link = "";
+          }
 
           const object = {
             id: value.id,
-            url: value.url,
+            url: back_link,
             title: properties.title.rich_text[0].plain_text,
             name: properties.name.rich_text[0].plain_text,
             category,
             date: {
               start: date.start.replaceAll("-", ".").slice(2),
               end: date.end ? date.end.replaceAll("-", ".").slice(2) : "",
-              period: properties["작업 기간"].rich_text[0].plain_text,
+              period: period.length ? period[0].plain_text : "",
             },
-            summary: properties["간단 설명"].rich_text[0].plain_text,
+            summary: summary.length ? summary[0].plain_text : "",
             links: {
+              data_url: value.url,
               git: properties.Git.url,
               page: properties["페이지"].url,
             },
@@ -191,7 +209,7 @@
             tools,
           }
           if( project.active.data.id == undefined && category == "company" ) {
-            // 첫 로딩시에만 적영될 선택된 프로젝트 (active.index는 이후로 쓰이지 않음)
+            // 첫 로딩시에만 적용될 선택된 프로젝트 (active.index는 이후로 쓰이지 않음)
             project.active.data = object;
             project.active.index = index;
           }
@@ -199,22 +217,21 @@
         })
         project.data = result;
         project.active.active = true;
+        this.loading = false;
       },
       selectCategory(category) { // 프로젝트 보여질 카테고리 변경
         const project = this.project;
         const contents_wrap = document.getElementById("contents-wrap");
         const active_class = "project--active";
-        const active_item = contents_wrap.querySelector(`.${active_class}`);
         // 활성화 시킬 project__item dom 가져오는 변수들
+        const active_item = contents_wrap.querySelector(`.${active_class}`);
         const active_target = category == "all" ? 
                               contents_wrap.querySelector(".project__item") :
                               contents_wrap.querySelectorAll(`.project-${category}`)[0];
-        const active_index = category == "all" ? 0 : active_target.dataset.projectIndex;
+        const active_index = category == "all" ? 0 : Number(active_target.dataset.projectIndex);
 
-        project.active.index = -1; // active.index 이 이후로 사용 x
+        project.active.index = active_index;
         active_item.classList.remove(active_class);
-        project.active.category = category;
-        active_target.classList.add(active_class);
         project.active.data = project.data[active_index];
       },
       projectFilter(category) { // 가져온 프로젝트 선택한 카테고리에 따라 보여주기
@@ -230,6 +247,7 @@
         const active_item = contents_wrap.querySelector(`.${active_class}`);
 
         project.active.data = data;
+        project.active.index = -1;
         active_item.classList.remove(active_class);
         event.currentTarget.classList.add(active_class);
       }
@@ -304,7 +322,6 @@
       max-width: 700px;
       font-family: $ptd !important;
       line-height: 1.4;
-      font-size: 18px;
       flex: 1 1 auto;
       padding-top: 8px;
     }

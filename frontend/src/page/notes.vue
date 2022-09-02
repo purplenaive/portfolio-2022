@@ -34,30 +34,38 @@
         <a 
           href="https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=83e98783aabf4d8bb7a2e36cef5a7829" 
           target="_blank" 
-          class="note__item note-view-all-button common-button outlined"
+          class="note__item note-view-all-button common-button button--outlined"
         >
           글 전체 보러가기
           <i class="icon arrow-right view-more-icon deep-blue" aria-hidden="true"></i>
         </a>
       </section>
     </section>
+    <loading-spinner :active="loading"></loading-spinner>
   </main>
 </template>
 
 <script>
+import loadingSpinner from "@/components/loadingSpinner.vue";
+
   export default {
     name: "noteCards",
+    components: {
+      loadingSpinner,
+    },
     data() {
       return {
         note: {
           data: [],
-        }
+        },
+        loading: true,
       };
     },
     methods: {
       getNotes() {
         this.$axios.get("/note/api/note")
           .then(response => {
+            this.loading = true;
             this.trimNotes(response.data)
           })
           .catch(error => {
@@ -78,6 +86,7 @@
           }
         })
         this.note.data = result;
+        this.loading = false;
       }
     },
     mounted() {

@@ -44,6 +44,8 @@ body {
 
   height: 45px;
   padding: 0 24px;
+  font-family: $ptd !important;
+  font-weight: $font-md;
   font-size: 16px;
   color: $deep-blue;
   text-align: center;
@@ -63,7 +65,7 @@ body {
     transition: all 0.3s ease;
   }
   // 클래스
-  &.active:not(.disabled):not(:disabled) {
+  &.button--active:not(.button--disabled):not(:disabled) {
     color: white;
     background-color: $deep-blue;
 
@@ -71,31 +73,31 @@ body {
       box-shadow: inset 0 4px 8px rgba($black, 0.5);
     }
   }
-  &.outlined {
+  &.button--outlined {
     border: 1px solid $deep-blue;
   }
-  &.outlined--black {
+  &.button--outlined--black {
     border: 1px solid $black;
   }
   // fab
-  &.fab {
+  &.button--fab {
     width: 45px;
     padding: 0;
   }
   // 비형식, 탈출된 스타일
-  &.escape {
+  &.button--escape {
     width: unset;
     height: unset;
     background-color: transparent;
   }
   // 최우선 상태 선택자
-  &.depressed {
+  &.button--depressed {
     
     &:hover {
       box-shadow: unset;
     }
   }
-  &.disabled,
+  &.button--disabled,
   &:disabled {
     color: $border-gray;
     background-color: $pale;
@@ -106,6 +108,43 @@ body {
 
     &:hover {
       box-shadow: unset !important;
+    }
+  }
+}
+// ********** COMMON DIALOG STYLE ********** //
+.common-dialog {
+  @include card;
+  @include flex(false, column, nowrap, flex-start, center);
+
+  padding: 24px 32px;
+  gap: 24px;
+  
+  .dialog__title {
+    width: 100%;
+    font-size: 20px;
+    font-weight: $font-b;
+    text-align: center;
+  }
+  .dialog__content {
+    width: 100%;
+    text-align: center;
+    font-weight: $font-md;
+    line-height: 1.4;
+  }
+  .dialog__actions {
+    @include flex(false, row, nowrap, center, center);
+
+    width: 100%;
+
+    &.actions--align-left {
+      justify-content: flex-start;
+    }
+    &.actions--align-right {
+      justify-content: flex-end;
+    }
+
+    .action-button {
+      padding: 10px 24px;
     }
   }
 }
@@ -150,4 +189,20 @@ body {
 }
 .card__contents {
   width: 100%;
+}
+
+// ********** vue Transition ********** //
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter-to,
+.v-leave {
+  opacity: 1;
 }

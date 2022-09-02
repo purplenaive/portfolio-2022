@@ -1,5 +1,7 @@
 <template>
+  <transition>
   <div 
+    v-if="active"
     class="component loading-spinner"
     :class="{'spinner--absolute': absolute}"
   >
@@ -17,16 +19,23 @@
           :r="(size - strokeWidth) / 2" 
           :stroke="color" 
           stroke-linejoin="round" 
-          :stroke-width="strokeWidth"/>
+          stroke-linecap="round"
+          :stroke-width="strokeWidth"
+        />
       </svg>
     </div>
   </div>
+  </transition>
 </template>
 
 <script>
   export default {
     name: "loadingSpinner",
     props: {
+      active: {
+        type: Boolean,
+        default: false,
+      },
       size: {
         type: Number,
         default: 46,
@@ -48,15 +57,7 @@
 </script>
 
 <style lang="scss" scoped>
-
-  @keyframes loading {
-    0% {
-      stroke-dashoffset: 500;
-    }
-    100% {
-      stroke-dashoffset: -200;
-    }
-  }
+  
   @keyframes loadingRotate {
     0% {
       transform: rotate(0);
@@ -84,11 +85,11 @@
     .spinner {
       
       svg {
-        animation: loadingRotate 2s linear infinite;
+        animation: loadingRotate 1s linear infinite;
 
         circle {
           stroke-dasharray: 500;
-          animation: loading 2s alternate linear infinite;
+          stroke-dashoffset: -20;
         }
       }
     }

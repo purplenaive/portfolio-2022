@@ -6,9 +6,18 @@ const options = {
   access_key: "secret_QEaI6MPUF0jvojsltXj9lCmCcjfJznR1xwIUURiubXc",
   project_token: "bb8c08d768a2428990305d0427d63665",
   note_token: "d1619275de714a158cc8d90bef99ddb4",
-  createOptions(target, date, size, filter) {
+  createOptions(target, date, page_size, filter, sorts) {
     const url = this[target + "_token"];
-    
+    const filter_length = Object.keys(filter).length;
+    const sort_length = sorts.length;
+    let data = {};
+
+    if(filter_length + sort_length) {
+      data = filter_length ? {page_size, filter} : {page_size, sorts};
+    } else {
+      data = {page_size};
+    }
+
     return {
       method: "POST",
       url: `https://api.notion.com/v1/databases/${url}/query`,
@@ -18,14 +27,18 @@ const options = {
         Authorization: `Bearer ${this.access_key}`,
         "Content-Type": "application/json",
       },
-      data: {page_size: size, filter},
+      data,
     }
   },
 }
 
-
-const project_options = options.createOptions("project", "2022-02-22", 20);
-const note_options = options.createOptions("note", "2022-02-22", 100, {
+const project_options = options.createOptions("project", "2022-02-22", 30, {}, [
+  {
+    "property": "category",
+    "direction": "descending",
+  }
+]);
+const note_options = options.createOptions("note", "2022-02-22", 30, {
   "and": [
     {
       "property": "view",
@@ -34,7 +47,7 @@ const note_options = options.createOptions("note", "2022-02-22", 100, {
       }
     }
   ]
-});
+}, []);
 
 // project data
 router.get("/api/project", async (req, res, next) => {

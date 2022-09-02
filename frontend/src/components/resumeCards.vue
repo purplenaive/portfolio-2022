@@ -35,7 +35,7 @@
     <article class="card card-certification">
       <div class="card__title">
         <h3 class="title__text">자격증 및 교육</h3>
-        <button class="title__action common-button fab escape">
+        <button class="title__action common-button button--fab button--escape">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
         </button>
       </div>
@@ -61,7 +61,7 @@
     <article class="card card-tools">
       <div class="card__title">
         <h3 class="title__text">기술 스택</h3>
-        <button class="title__action common-button fab escape">
+        <button class="title__action common-button button--fab button--escape">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
         </button>
       </div>
@@ -113,7 +113,7 @@
     <article class="card card-career">
       <div class="card__title">
         <h3 class="title__text">경력사항</h3>
-        <button class="title__action common-button fab escape">
+        <button class="title__action common-button button--fab button--escape">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
         </button>
       </div>
@@ -127,7 +127,7 @@
           >
             <div class="career__title">
               <h4 class="title__text">{{career.name}}</h4>
-              <button class="career-detail-button common-button fab outlined--black escape">
+              <button class="career-detail-button common-button button--fab button--outlined--black button--escape">
                 <i class="icon chevron-right"><span class="sr-only">경력사항 자세히 보기</span></i>
               </button>
             </div>
