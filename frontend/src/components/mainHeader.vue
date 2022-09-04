@@ -26,10 +26,8 @@
           active: "",
           data: [
             { name: "self-introduce", title: "자기소개", icon: "profile", path: "home"},
-            // { name: "career", title: "경력사항", icon: "paper", path: "home"},
             { name: "project", title: "프로젝트", icon: "code", path: "project"},
             { name: "note", title: "공책", icon: "note", path: "note"},
-            { name: "contact", title: "연락하기", icon: "call", path: "home"},
           ]
         }
       }
@@ -54,6 +52,10 @@
       @include section-1200(false);
 
       height: 100%;
+
+      @include responsive-mobile {
+        justify-content: center;
+      }
     }
   }
 
@@ -62,6 +64,11 @@
 
     height: 100%;
     transform: translate(12px, 0);
+
+    @include responsive-mobile {
+      justify-content: center;
+      transform: unset;
+    }
 
     .nav__item {
       @include flex(true, row, nowrap, flex-end, center);
@@ -74,9 +81,24 @@
       transition: all 0.3s;
       cursor: pointer;
 
+      @include responsive-mobile {
+        padding: 12px 8px;
+      }
+
       .nav__text {
         font-size: 16px;
         font-weight: $font-md;
+
+        @include responsive-mobile {
+          font-size: 15px;
+        }
+      }
+
+      .icon {
+
+        @include responsive-mobile {
+          @include icon-custom(20);
+        }
       }
     }
   }

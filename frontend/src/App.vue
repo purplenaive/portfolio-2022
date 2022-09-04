@@ -2,22 +2,19 @@
   <main-header></main-header>
   <router-view></router-view>
   <main-footer></main-footer>
-  <main-dialog :active="main_dialog" @close="main_dialog = false"></main-dialog>
 </template>
 
 <script>
 import mainHeader from "@/components/mainHeader.vue";
 import mainFooter from "@/components/mainFooter.vue";
-import mainDialog from "@/components/mainDialog.vue";
 
 export default {
   name: 'App',
   components: {
-    mainHeader, mainFooter, mainDialog,
+    mainHeader, mainFooter,
   },
   data() {
     return {
-      main_dialog: true,
     }
   },
 }

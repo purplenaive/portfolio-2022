@@ -3,7 +3,9 @@
     <!-- 프로필 -->
     <article class="card card-profile">
       <div class="profile">
-        <div class="profile__avatar"></div>
+        <div class="profile__avatar">
+          <img src="@/assets/images/profile-image.jpg" alt="프로필 이미지" class="profile-image">
+        </div>
         <p class="profile__name">{{profile.name}}</p>
         <p class="profile__message">{{profile.message}}</p>
       </div>
@@ -278,15 +280,28 @@
 <style lang="scss" scoped>
   .resume-cards {
     @include section-1200(false);
-    @include flex(false, column, wrap, flex-start, flex-end);
+    @include flex(false, column, wrap, stretch, flex-end);
 
     align-content: flex-end;
-    max-height: 1000px;
+    height: 970px;
     gap: 24px;
     margin-bottom: 24px;
 
+    @include responsive-custom(950) {
+      height: auto;
+      max-height: 1400px;
+    }
+    @include responsive-tablet {
+      flex-wrap: nowrap;
+      max-height: unset;
+    }
+
     .card:not(.icon) {
       @include card;
+
+      @include responsive-tablet {
+        width: 100%;
+      }
     }
   }
 
@@ -295,6 +310,11 @@
     width: 300px;
     position: relative;
     overflow: visible !important;
+    
+    @include responsive-custom(950) {
+      width: calc(45% - (24px / 2));
+      margin-bottom: (91px + 24px);
+    }
 
     .profile {
       text-align: center;
@@ -305,8 +325,15 @@
         height: 64px;
         border-radius: 50%;
         margin: 0 auto 16px;
+        overflow: hidden;
         background-color: $skyblue;
       }
+      .profile-image {
+        display: block;
+        width: 100%;
+        height: auto;  
+      }
+
       .profile__name {
         margin-bottom: 8px;
         font-weight: $font-b;
@@ -348,6 +375,16 @@
     left: -24px;
     transform: translate(-100%, 0);
 
+    @include responsive-custom(950) {
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      bottom: -24px;
+      top: auto;
+      left: 0;
+      transform: translate(0, 100%);
+    }
+
     .info__item {
       width: 100%;
 
@@ -365,6 +402,10 @@
   // ********** CERTIFICATION CARD ********** //
   .card-certification {
     width: 440px;
+
+    @include responsive-custom(950) {
+      width: calc(45% - (24px / 2));
+    }
 
     .certification-list {
 
@@ -390,7 +431,13 @@
   }
   // ********** TOOLS CARD ********** //
   .card-tools {
+    flex: 1 1 auto;
     width: 440px;
+
+    @include responsive-custom(950) {
+      flex: 0 0 auto;
+      width: calc(45% - (24px / 2));
+    }
   }
   .tools-list {
     @include flex(false, column, nowrap, flex-start, center);
@@ -403,6 +450,11 @@
 
       width: 100%;
 
+      @include responsive-custom(950) {
+        flex-direction: column;
+        gap: 8px;
+      }
+
       .tools__title {
         @include flex(true, row, nowrap, flex-start, center);
 
@@ -411,18 +463,27 @@
       .title__text {
         font-weight: $font-md;
         font-size: 16px;
+
       }
       .tools__content {
         width: 240px;
         font-size: 15px;
         font-weight: $font-lt;
         line-height: 1.4;
+
+        @include responsive-custom(950) {
+          width: 100%;
+        }
       }
     }
   }
   // ********** SELF INTRODUCE CARD ********** //
   .card-self-introduce {
     width: 420px;
+
+    @include responsive-custom(950) {
+      width: calc(55% - (24px / 2));
+    }
 
     .card__title {
 
@@ -462,7 +523,12 @@
   // ********** CAREER CARD ********** //
   .card-career {
     width: 420px;
-    height: 618px;
+    flex: 1 1 auto;
+
+    @include responsive-custom(950) {
+      flex: 0 0 auto;
+      width: calc(55% - (24px / 2));
+    }
   }
   .career-list {
     width: 100%;
@@ -502,6 +568,11 @@
       color: $text-gray;
       margin-bottom: 24px;
 
+      @include responsive-mobile {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .info__date {
         width: 170px;
         margin-right: 12px;
@@ -516,6 +587,10 @@
           position: absolute;
           right: 0;
           top: 2px;
+
+          @include responsive-mobile {
+            display: none;
+          }
         }
       }
       .date__period {

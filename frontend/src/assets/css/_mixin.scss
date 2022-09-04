@@ -12,6 +12,10 @@
   margin: 0 auto;
   padding: if($padding, 24px, 0);
   overflow: if($overflow, hidden, visible);
+  
+  @include responsive-1280 {
+    width: calc(100% - 36px);
+  }
 }
 
 // ********** card ********** //
@@ -22,4 +26,61 @@
     padding: if($mini, 16px, 24px);
   }
   background-color: white;
+}
+
+
+// ********** responsive ********** //
+$web-1920: 1920; // 1440
+$web-1440: 1440; // 1440
+$web-1366: 1366; // 1280
+$web-1280: 1280; // 1280
+$tablet: 768;
+$mobile: 375; // 360
+
+@mixin responsive-portrait {
+  @media all and ( orientation: portrait ) {
+    @content;
+  }
+}
+@mixin responsive-landscape {
+  @media all and ( orientation: landscape ) {
+    @content;
+  }
+}
+
+@mixin responsive-1920 {
+  @media all and ( max-width: $web-1920 - 1 + px ) {
+    @content;
+  }
+}
+@mixin responsive-1440 {
+  @media all and ( max-width: $web-1440 - 1 + px ) {
+    @content;
+  }
+}
+@mixin responsive-1366 {
+  @media all and ( max-width: $web-1366 - 1 + px ) {
+    @content;
+  }
+}
+@mixin responsive-1280 {
+  @media all and ( max-width: $web-1280 - 1 + px ) {
+    @content;
+  }
+}
+@mixin responsive-tablet {
+  @media all and ( max-width: $tablet - 1 + px ) {
+    @content;
+  }
+}
+@mixin responsive-mobile {
+  @media all and ( max-width: $mobile - 1 + px ) {
+    @content;
+  }
+}
+
+@mixin responsive-custom($width) {
+	@media all and ( max-width: $width - 1 + px ) {
+		@content;
+	}
 }

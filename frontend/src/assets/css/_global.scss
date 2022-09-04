@@ -152,6 +152,7 @@ body {
 .common-tag-list {
   @include flex(false, row, wrap, flex-start, center);
 
+  width: 100%;
   align-content: center;
   gap: 8px;
 

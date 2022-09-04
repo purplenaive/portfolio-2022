@@ -101,6 +101,8 @@ import loadingSpinner from "@/components/loadingSpinner.vue";
 
   // note section title 
   .notes__title {
+    @include section-1200;
+
     margin-bottom: 48px;
 
     .avatar {
@@ -123,7 +125,16 @@ import loadingSpinner from "@/components/loadingSpinner.vue";
     gap: $note-gap;
     margin: 0 auto;
     width: calc(($note-width * 6) + ($note-gap * 5));
-
+    
+    @include responsive-1280 {
+      width: calc(($note-width * 5) + ($note-gap * 4));
+    }
+    @include responsive-custom(1024) {
+      width: calc(($note-width * 3) + ($note-gap * 2));
+    }
+    @include responsive-tablet {
+      width: calc(100% - 48px);
+    }
   }
   // note item
   .note__item {
@@ -134,6 +145,16 @@ import loadingSpinner from "@/components/loadingSpinner.vue";
     border: 1px solid white;
     transition: all 0.3s ease;
     position: relative;
+
+    @include responsive-tablet {
+      width: calc(33.33% - (16px * 2 / 3));
+    }
+    @include responsive-custom(640) {
+      width: calc(50% - (16px * 1 / 2));
+    }
+    @include responsive-custom(480) {
+      width: 100%;
+    }
 
     .inner {
       display: block;
@@ -212,8 +233,17 @@ import loadingSpinner from "@/components/loadingSpinner.vue";
   .note-view-all-button {
     width: 180px;
     height: 180px;
-
     border-color: $deep-blue;
+
+    @include responsive-tablet {
+      width: calc(33.33% - (16px * 2 / 3));
+    }
+    @include responsive-custom(640) {
+      width: calc(50% - (16px * 1 / 2));
+    }
+    @include responsive-custom(480) {
+      width: 100%;
+    }
 
     .view-more-icon {
       display: inline-block;

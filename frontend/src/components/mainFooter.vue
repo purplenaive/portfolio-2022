@@ -49,11 +49,21 @@
     z-index: -1;
     background-color: $pale-blue;
 
+    @include responsive-tablet {
+      height: 120px;
+    }
+
     .footer__inner {
       @include section-1200(false);
       @include flex(false, row, nowrap, space-between, center);
 
       height: 100%;
+
+      @include responsive-tablet {
+        flex-direction: column;
+        justify-content: center;
+        gap: 6px;
+      }
     }
 
     .footer__title {

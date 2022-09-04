@@ -30,7 +30,7 @@
             </p>
           </li>
         </ul>
-        <pre class="view__summary" v-html="project.active.data.summary"></pre>
+        <p class="view__summary" v-html="project.active.data.summary"></p>
         <ul class="view__tools-list">
           <li 
             v-for="tool in project.active.data.tools"
@@ -47,6 +47,7 @@
             title="깃 페이지 이동하기"
           >
             <i class="icon git small"><span class="sr-only">깃 페이지 이동하기</span></i>
+            <span class="button__text--mobile" aria-hidden="true">GIT</span>
           </a>
           <a 
             :href="project.active.data.url" 
@@ -56,7 +57,7 @@
           >설명 보기</a>
           <a 
             :href="project.active.data.links.page" 
-            class="action__button common-button button--active"
+            class="action__button common-button button--active visit-page-button"
             :class="{'disabled': !project.active.data.links.page}"
             target="_blank"
           >페이지</a>
@@ -228,7 +229,10 @@
         const active_target = category == "all" ? 
                               contents_wrap.querySelector(".project__item") :
                               contents_wrap.querySelectorAll(`.project-${category}`)[0];
-        const active_index = category == "all" ? 0 : Number(active_target.dataset.projectIndex);
+        const target_index = Number(active_target.dataset.projectIndex);
+        const active_index = category == "all" ? 0 : target_index;
+
+        if(target_index === Number(active_item.dataset.projectIndex)) return;
 
         project.active.index = active_index;
         active_item.classList.remove(active_class);
@@ -242,14 +246,17 @@
       },
       selectProject(event, data) { // 선택한 프로젝트 자세히 보기
         const project = this.project;
+        const target = event.currentTarget;
         const active_class = "project--active";
         const contents_wrap = document.getElementById("contents-wrap");
         const active_item = contents_wrap.querySelector(`.${active_class}`);
 
+        if(target.classList.contains(active_class)) return;
+
         project.active.data = data;
         project.active.index = -1;
         active_item.classList.remove(active_class);
-        event.currentTarget.classList.add(active_class);
+        target.classList.add(active_class);
       }
     },
     mounted() {
@@ -274,12 +281,21 @@
   // *********** project view *********** //
   .project__view {
     @include card;
-    @include flex(false, column, wrap, flex-start, space-between);
+    @include flex(false, column, wrap, flex-start, unset);
 
     gap: 20px;
+    align-content: space-between;
     height: 250px;
     padding: 32px;
     background-color: rgba($deep-blue, 0.08);
+
+    @include responsive-custom(1024) {
+      height: unset;
+      flex-wrap: nowrap;
+    }
+    @include responsive-mobile {
+      padding: 24px;
+    }
 
     .view__title {
       @include flex(false, row, nowrap, flex-start, center);
@@ -297,20 +313,37 @@
     }
 
     .view__info-list {
-      
+
       .info__item {
         @include flex(false, row, nowrap, flex-start, center);
 
         line-height: 1.6;
+
+        @include responsive-mobile {
+          flex-wrap: wrap;  
+          margin-bottom: 8px;
+          
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
       }
       .info__title {
         @include flex(false, row, nowrap, flex-start, center);
 
         width: 105px;
         gap: 6px;
+
+        @include responsive-mobile {
+          width: 100%; 
+        }
       }
       .info__value {
         color: $text-gray;
+
+        @include responsive-mobile {
+          width: 100%; 
+        }
       }
     }
     .view__contribution {
@@ -324,20 +357,33 @@
       line-height: 1.4;
       flex: 1 1 auto;
       padding-top: 8px;
+
+      @include responsive-1280 {
+        max-width: 60%;
+      }
+      @include responsive-custom(1024) {
+        max-width: unset;
+        width: 100%;
+      }
     }
 
     .view__tools-list {
       @include flex(false, row, wrap, flex-end, flex-start);
 
-      // width: ;
       height: 50px;
       gap: 8px;
+
+      @include responsive-custom(1024) {
+        height: unset;
+      }
+      @include responsive-mobile {
+        justify-content: flex-start;
+      }
       
       .tool__item {
         font-size: 14px;
         font-weight: $font-lt;
         color: $text-gray;
-
       }
     }
 
@@ -347,6 +393,40 @@
       gap: 12px;
       justify-self: flex-end;
       margin-top: auto;
+
+      @include responsive-mobile {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .common-button {
+        @include responsive-tablet {
+          width: unset;
+          height: 40px;
+          padding: 0 16px;
+        }
+
+        .icon {
+          @include responsive-tablet {
+            display: none;
+          }
+        }
+
+        &.visit-page-button {
+          
+          @include responsive-mobile {
+            width: 200px;
+          }
+        }
+      }
+
+      .button__text--mobile {
+        display: none;
+
+        @include responsive-tablet {
+          display: block;
+        }
+      }
     }
   }
   .project-list-wrapper {
@@ -359,11 +439,21 @@
     width: 100%;
     margin-bottom: 24px;
 
+    @include responsive-tablet {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
     .category__title {
       @include flex(false, row, nowrap, flex-start, center);
 
       gap: 8px;
       font-size: 18px;
+
+      @include responsive-tablet {
+        margin-bottom: 12px;
+      }
 
       .icon {
         @include icon-custom(18);
@@ -376,11 +466,33 @@
     gap: 4px;
     transform: translate(6px, 0);
 
+    @include responsive-tablet {
+      transform: translate(-6px, 0);
+    }
+    @include responsive-custom(540) {
+      flex-wrap: wrap;
+      gap: unset;
+      width: 100%;
+    }
+    @include responsive-mobile {
+      transform: unset;
+      gap: 4px;
+    }
+
     .category__item {
       @include flex(false, row, nowrap, flex-start, center);
 
       gap: 6px;
       padding: 4px 6px;
+
+      @include responsive-custom(540) {
+        flex-wrap: wrap;
+        width: 50%;
+      }
+      @include responsive-mobile {
+        width: calc(50% - (4px * 1 / 2));
+        padding: 0;
+      }
     }
     .category__radio {
       appearance: radio;
@@ -407,6 +519,16 @@
     transition: all .3s ease;
     position: relative;
     cursor: pointer;
+
+    @include responsive-custom(1024) {
+      width: calc(25% - (16px * 3 / 4));
+    }
+    @include responsive-tablet {
+      width: calc(50% - (16px * 1 / 2));
+    }
+    @include responsive-custom(540) {
+      width: 100%;
+    }
 
     &.project--active,
     &:hover {
