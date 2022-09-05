@@ -42,7 +42,7 @@
           <a 
             :href="project.active.data.links.git" 
             class="action__button common-button button--fab"
-            :class="{'disabled': !project.active.data.links.git}"
+            :class="{'button--disabled': !project.active.data.links.git}"
             target="_blank"
             title="깃 페이지 이동하기"
           >
@@ -52,13 +52,13 @@
           <a 
             :href="project.active.data.url" 
             class="action__button common-button"
-            :class="{'disabled': !project.active.data.url}"
+            :class="{'button--disabled': !project.active.data.url}"
             target="_blank"
-          >설명 보기</a>
-          <a 
+            >설명 보기</a>
+            <a 
             :href="project.active.data.links.page" 
             class="action__button common-button button--active visit-page-button"
-            :class="{'disabled': !project.active.data.links.page}"
+            :class="{'button--disabled': !project.active.data.links.page}"
             target="_blank"
           >페이지</a>
         </div>
@@ -210,7 +210,7 @@
             tools,
           }
           if( project.active.data.id == undefined && category == "company" ) {
-            // 첫 로딩시에만 적용될 선택된 프로젝트 (active.index는 이후로 쓰이지 않음)
+            // 첫 로딩시에만 적용될 선택된 프로젝트
             project.active.data = object;
             project.active.index = index;
           }

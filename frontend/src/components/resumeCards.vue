@@ -37,9 +37,9 @@
     <article class="card card-certification">
       <div class="card__title">
         <h3 class="title__text">자격증 및 교육</h3>
-        <button class="title__action common-button button--fab button--escape">
+        <a :href="certification.link" class="title__action common-button button--fab button--escape" target="_blank">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
-        </button>
+        </a>
       </div>
 
       <div class="card__contents">
@@ -63,9 +63,9 @@
     <article class="card card-tools">
       <div class="card__title">
         <h3 class="title__text">기술 스택</h3>
-        <button class="title__action common-button button--fab button--escape">
+        <a :href="tools.link" class="title__action common-button button--fab button--escape" target="_blank">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
-        </button>
+        </a>
       </div>
       <div class="card__contents">
         <ul class="tools-list">
@@ -115,9 +115,9 @@
     <article class="card card-career">
       <div class="card__title">
         <h3 class="title__text">경력사항</h3>
-        <button class="title__action common-button button--fab button--escape">
+        <a :href="career.link" class="title__action common-button button--fab button--escape" target="_blank">
           <i class="icon list deep-blue"><span class="sr-only">목록보기</span></i>
-        </button>
+        </a>
       </div>
 
       <div class="card__contents">
@@ -129,9 +129,14 @@
           >
             <div class="career__title">
               <h4 class="title__text">{{career.name}}</h4>
-              <button class="career-detail-button common-button button--fab button--outlined--black button--escape">
+              <a
+                :href="career.link"
+                class="career-detail-button common-button button--fab button--outlined--black button--escape"
+                :class="{'button--disabled': !career.link,}"
+                target="_blank"
+              >
                 <i class="icon chevron-right"><span class="sr-only">경력사항 자세히 보기</span></i>
-              </button>
+              </a>
             </div>
             <div class="career__info">
               <div class="info__date">
@@ -176,12 +181,14 @@
           { title: "이력서", name: "resume", icon: "paper", path: "https://purplenaive.notion.site/833eb81908cc490ea33a5596d5c0de42" },
         ],
         certification: {
+          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#8e5390f9a42e495ea2a6888cbcaf9178",
           data: [
             {type: "card", name: "웹디자인기능사", date: "18.07.23"},
             {type: "card", name: "웹&앱 디자인 교육", date: "2018"},
           ]
         },
         tools: {
+          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#26f28e7312d7461bb0785b4e8dcd2ae7",
           data: [
             {
               name: "HTML",
@@ -224,14 +231,15 @@
           ]
         },
         career: {
+          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#bdd7cd0ebefb4edb8a166c80c48d2dae",
           data: [
             {
               name: "연합시스템",
-              link: "/",
+              link: "https://purplenaive.notion.site/441a86149fa745cda555928a191619c9",
               date: {
                 start: "20.10",
                 end: "",
-                period: "22개월 ~"
+                period: "23개월 ~"
               },
               position: "주임",
               job: "퍼블리셔",
@@ -243,7 +251,7 @@
             },
             {
               name: "플로언스",
-              link: "/",
+              link: "https://purplenaive.notion.site/ec0d576bea454afd864c976688bc8add",
               date: {
                 start: "19.03",
                 end: "20.02",
@@ -258,7 +266,7 @@
             },
             {
               name: "진담",
-              link: "/",
+              link: "",
               date: {
                 start: "18.12",
                 end: "19.01",

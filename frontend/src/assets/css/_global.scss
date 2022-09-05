@@ -20,6 +20,10 @@ body {
   background-color: $pale;
 }
 
+// ********** NO POINTER EVENT ********** //
+.pointer--no-event {
+  pointer-events: none;
+}
 // ********** SCREEEN READER ONLY ********** //
 .sr-only {
   border: 0 !important;
@@ -99,6 +103,8 @@ body {
   }
   &.button--disabled,
   &:disabled {
+    @extend .pointer--no-event;
+
     color: $border-gray;
     background-color: $pale;
 
@@ -106,6 +112,10 @@ body {
       opacity: .5;
     }
 
+    &.button--outlined,
+    &.button--outlined--black {
+      border-color: $border-gray;
+    }
     &:hover {
       box-shadow: unset !important;
     }
@@ -191,6 +201,7 @@ body {
 .card__contents {
   width: 100%;
 }
+
 
 // ********** vue Transition ********** //
 .v-enter-active,

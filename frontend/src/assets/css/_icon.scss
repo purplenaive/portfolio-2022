@@ -39,7 +39,7 @@ $icon-list: null;
 
   @return map-get($icon-list, $name);
 }
-$white-list: (call, mail, paper, note, purplenaive-line);
+$white-list: (call, mail, paper, note, purplenaive-line, arrow-right);
 $deep-blue-list: (profile, paper, code, note, call, purplenaive, folder, folder-open, arrow-right);
 $gray-list: (pencil);
 
