@@ -106,4 +106,4 @@ dist
 
 # custom
 node_modules
-backend/public
+backend/public/
