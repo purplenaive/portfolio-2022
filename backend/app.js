@@ -7,7 +7,7 @@ const history = require("connect-history-api-fallback");
 
 var indexRouter = require('./routes/index');
 const notionRouter = require("./routes/notion");
-const kinderRouter = require("./routes/kinder");
+// const kinderRouter = require("./routes/kinder");
 
 var app = express();
 
@@ -25,13 +25,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/project', notionRouter);
 app.use('/note', notionRouter);
-app.use("/kinder", express.static(path.join(__dirname, "public/project/kinderfest")));
-app.use("kinder/*", kinderRouter);
+// app.use("/kinder", express.static(path.join(__dirname, "public/project/kinderfest")));
+// app.use("/kinder/*", kinderRouter);
 
 app.use(history());
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "public/project/kinderfest", "index.html"));
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
