@@ -177,18 +177,18 @@
         info_links: [
           { title: "연락처", name: "call", icon: "call", path: "tel:01084353663" },
           { title: "이메일", name: "email", icon: "mail", path: "mailto:purplenaive@gmail.com" },
-          { title: "블로그", name: "blog", icon: "note", path: "https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=d7be502b8a17444a8b8f7c45f627715e" },
+          { title: "블로그", name: "blog", icon: "note", path: "https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=83e98783aabf4d8bb7a2e36cef5a7829" },
           { title: "이력서", name: "resume", icon: "paper", path: "https://purplenaive.notion.site/833eb81908cc490ea33a5596d5c0de42" },
         ],
         certification: {
-          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#8e5390f9a42e495ea2a6888cbcaf9178",
+          link: "https://purplenaive.notion.site/purplenaive/833eb81908cc490ea33a5596d5c0de42#8e5390f9a42e495ea2a6888cbcaf9178",
           data: [
             {type: "card", name: "웹디자인기능사", date: "18.07.23"},
             {type: "card", name: "웹&앱 디자인 교육", date: "2018"},
           ]
         },
         tools: {
-          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#26f28e7312d7461bb0785b4e8dcd2ae7",
+          link: "https://purplenaive.notion.site/purplenaive/833eb81908cc490ea33a5596d5c0de42#26f28e7312d7461bb0785b4e8dcd2ae7",
           data: [
             {
               name: "HTML",
@@ -231,7 +231,7 @@
           ]
         },
         career: {
-          link: "https://www.notion.so/purplenaive/833eb81908cc490ea33a5596d5c0de42#bdd7cd0ebefb4edb8a166c80c48d2dae",
+          link: "https://purplenaive.notion.site/purplenaive/833eb81908cc490ea33a5596d5c0de42#bdd7cd0ebefb4edb8a166c80c48d2dae",
           data: [
             {
               name: "연합시스템",

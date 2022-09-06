@@ -31,7 +31,7 @@
         contact_links: [
           { title: "전화 걸기", name: "call", icon: "call", path: "tel:01084353663" },
           { title: "이메일 보내기", name: "email", icon: "mail", path: "mailto:purplenaive@gmail.com" },
-          { title: "블로그 방문하기", name: "blog", icon: "note", path: "https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=d7be502b8a17444a8b8f7c45f627715e" },
+          { title: "블로그 방문하기", name: "blog", icon: "note", path: "https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=83e98783aabf4d8bb7a2e36cef5a7829" },
           { title: "이력서 보러가기", name: "resume", icon: "paper", path: "https://purplenaive.notion.site/833eb81908cc490ea33a5596d5c0de42" },
         ],
       };

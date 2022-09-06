@@ -79,7 +79,7 @@ import loadingSpinner from "@/components/loadingSpinner.vue";
 
           return {
             id: val.id,
-            url: val.url,
+            url: val.url.replace("www.notion.so", "purplenaive.notion.site"),
             title: properties["제목"].title[0].plain_text,
             summary,
             status: properties["작성"].status ? properties["작성"].status.name : "done",

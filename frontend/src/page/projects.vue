@@ -169,12 +169,12 @@
 
         const result = data.map((value, index) => {
           const properties = value.properties;
-          const date = properties["작업 날짜"].date;
-          const tags = properties["태그"].multi_select.map(item => item.name);
-          const tools = properties["사용 툴"].multi_select.map(item => item.name);
+          const date = properties.date.date;
+          const tags = properties.tag.multi_select.map(item => item.name);
+          const tools = properties.tool.multi_select.map(item => item.name);
           const category = properties.category.select ? properties.category.select.name : "";
-          const period =  properties["작업 기간"].rich_text;
-          const summary = properties["간단 설명"].rich_text;
+          const period =  properties.period.rich_text;
+          const summary = properties.summary.rich_text;
           let back_link = properties.back_link.rich_text;
           let back_link_length = back_link.length;
           
@@ -190,7 +190,7 @@
 
           const object = {
             id: value.id,
-            url: back_link,
+            url: back_link.replace("www.notion.so", "purplenaive.notion.site"),
             title: properties.title.rich_text[0].plain_text,
             name: properties.name.rich_text[0].plain_text,
             category,
@@ -202,10 +202,10 @@
             summary: summary.length ? summary[0].plain_text : "",
             links: {
               data_url: value.url,
-              git: properties.Git.url,
-              page: properties["페이지"].url,
+              git: properties.git.url,
+              page: properties.page.url,
             },
-            contribution: properties["기여도"].number,
+            contribution: properties.contribution.number,
             tags,
             tools,
           }
