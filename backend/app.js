@@ -25,7 +25,7 @@ app.use('/', indexRouter);
 app.use('/project', notionRouter);
 app.use('/note', notionRouter);
 app.use("/kinder", express.static(path.join(__dirname, "public/project/kinderfest")));
-app.use("/kinde/*r", kinderRouter);
+app.use("/kinder/*", kinderRouter);
 
 app.use(history());
 // SPA reload error modify
