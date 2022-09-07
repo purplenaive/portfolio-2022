@@ -5,10 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const history = require("connect-history-api-fallback");
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 const notionRouter = require("./routes/notion");
-var app = express();
+const kinderRouter = require("./routes/kinder");
 
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '/'));
@@ -23,10 +24,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/project', notionRouter);
 app.use('/note', notionRouter);
+app.use("/kinder", express.static(path.join(__dirname, "public/project/kinderfest")));
+app.use("/kinde/*r", kinderRouter);
 
 app.use(history());
+// SPA reload error modify
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
+  const original_url = req.originalUrl;
+  let dir = "/";
+  
+  if(original_url.includes("kinder")) {
+    dir = "/project/kinderfest/";
+  } else {
+    dir = "/";
+  }
+  res.sendFile(path.join(__dirname + `/public${dir}index.html`));
 });
 
 // catch 404 and forward to error handler
