@@ -377,6 +377,7 @@
         height: unset;
       }
       @include responsive-mobile {
+        padding-top: 14px;
         justify-content: flex-start;
       }
       
@@ -454,6 +455,10 @@
       @include responsive-tablet {
         margin-bottom: 12px;
       }
+      @include responsive-mobile {
+        margin-bottom: 16px;
+        align-items: flex-start;
+      }
 
       .icon {
         @include icon-custom(18);
@@ -490,8 +495,9 @@
         width: 50%;
       }
       @include responsive-mobile {
+        gap: 2px;
         width: calc(50% - (4px * 1 / 2));
-        padding: 0;
+        padding: 6px 0;
       }
     }
     .category__radio {
