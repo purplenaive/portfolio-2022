@@ -9,8 +9,10 @@
         </p>
       </div>
       <section class="note-list">
+        <skeleton-ui v-if="loading" column="6" height="180" responsive="skeleton--responsive-note"></skeleton-ui>
         <!-- 노트 하나 시작 -->
-        <article 
+        <article
+          v-show="!loading" 
           v-for="note in note.data"
           :key="note.id"
           class="note__item"
@@ -32,6 +34,7 @@
           </a>
         </article>
         <a 
+          v-show="!loading"
           href="https://purplenaive.notion.site/d1619275de714a158cc8d90bef99ddb4?v=83e98783aabf4d8bb7a2e36cef5a7829" 
           target="_blank" 
           class="note__item note-view-all-button common-button button--outlined"
@@ -46,12 +49,13 @@
 </template>
 
 <script>
-import loadingSpinner from "@/components/loadingSpinner.vue";
+  import loadingSpinner from "@/components/loadingSpinner.vue";
+  import skeletonUi from "@/components/skeletonUI.vue";
 
   export default {
     name: "noteCards",
     components: {
-      loadingSpinner,
+      loadingSpinner, skeletonUi,
     },
     data() {
       return {

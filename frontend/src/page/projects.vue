@@ -1,8 +1,9 @@
 <template>
   <main class="main page project-page">
     <section class="project-wrapper">
-      <!-- 프로젝트 자세히 보기 -->
-      <article class="project__view" v-if="project.active.data.id">
+      <!-- ========== 프로젝트 자세히 보기 ========== -->
+      <skeleton-ui v-if="loading" type="intro" key="intro"></skeleton-ui>
+      <article v-else class="project__view">
         <p class="view__title">
           <i class="icon folder-open deep-blue" aria-hidden="true"></i>
           <span class="title__text">{{project.active.data.title}}</span>
@@ -64,6 +65,7 @@
         </div>
       </article>
 
+      <!-- ========== 프로젝트 ========== -->
       <article class="project-list-wrapper">
         <!-- 프로젝트 카테고리 -->
         <div class="project__category-wrapper">
@@ -92,7 +94,8 @@
           </form>
         </div>
         <!-- 프로젝트 리스트 -->
-        <ul id="contents-wrap" class="project-list">
+        <skeleton-ui v-if="loading" key="grid" responsive="skeleton--responsive-project"></skeleton-ui>
+        <ul v-else id="contents-wrap" class="project-list">
           <li 
             v-for="pj, pj_index in project.data"
             :key="pj.id"
@@ -126,11 +129,12 @@
 
 <script>
   import loadingSpinner from "@/components/loadingSpinner.vue";
+  import skeletonUi from "@/components/skeletonUI.vue";
 
   export default {
     name: "projectPage",
     components: {
-      loadingSpinner,
+      loadingSpinner, skeletonUi,
     },
     data() {
       return {

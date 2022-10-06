@@ -43,11 +43,6 @@ $white-list: (call, mail, paper, note, purplenaive-line, arrow-right);
 $deep-blue-list: (profile, paper, code, note, call, purplenaive, folder, folder-open, arrow-right);
 $gray-list: (pencil);
 
-@mixin icon-custom($size) {
-  width: $size + px;
-  height: $size + px;
-}
-
 .icon {
   display: block;
   width: 24px;

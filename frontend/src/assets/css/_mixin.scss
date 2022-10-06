@@ -1,4 +1,4 @@
-// ********** flex ********** //
+// ========== flex ========== //
 @mixin flex($inline: false, $direction: row, $wrap: nowrap, $justify: center, $align: center) {
   display: if($inline, inline-flex, flex);
   flex-flow: $direction $wrap;
@@ -6,7 +6,7 @@
   align-items: $align;
 }
 
-// ********** section--1200 ********** //
+// ========== section--1200 ========== //
 @mixin section-1200($padding: true, $overflow: true) {
   width: 1200px;
   margin: 0 auto;
@@ -18,7 +18,7 @@
   }
 }
 
-// ********** card ********** //
+// ========== card ========== //
 @mixin card($padding: true, $mini: false) {
   overflow: hidden;
   border-radius: 24px;
@@ -28,8 +28,14 @@
   background-color: white;
 }
 
+// ========== icon size custom ========== //
+@mixin icon-custom($size) {
+  width: $size + px;
+  height: $size + px;
+}
 
-// ********** responsive ********** //
+
+// ========== responsive ========== //
 $web-1920: 1920; // 1440
 $web-1440: 1440; // 1440
 $web-1366: 1366; // 1280
