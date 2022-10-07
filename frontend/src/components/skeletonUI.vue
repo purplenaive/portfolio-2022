@@ -60,10 +60,6 @@
         type: String,
         default: "grid"
       },
-      element: {
-        type: String,
-        default: "li",
-      },
       height: {
         type: Number,
         default: 140,
